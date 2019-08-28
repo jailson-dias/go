@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  api:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/proj/src/go/apiRest
+    depends_on:
+      - postgres
+
+  postgres:
+    image: "postgres:11.5-alpine"
+    ports:
+      - 5432:5432
+

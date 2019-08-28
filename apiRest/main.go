@@ -1,5 +1,15 @@
 package main
 
+import "go/apiRest/db"
+
+func main() {
+	base := db.Connect()
+	db.Close(base)
+}
+
+/*
+package main
+
 import (
 	"log"
 	"net/http"
@@ -19,3 +29,5 @@ func main() {
 	// router.HandleFunc("/contato/{id}", DeletePerson).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
+
+*/
