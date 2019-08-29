@@ -2,8 +2,10 @@ package db
 
 import (
 	"fmt"
+	"go/apiRest/db/models"
 	"log"
 	"os"
+	"time"
 
 	"github.com/go-pg/pg"
 )
@@ -22,7 +24,18 @@ func Connect() *pg.DB {
 		log.Println("Failed to connect to database.")
 		os.Exit(1)
 	}
-	log.Println("Connection to database successful.")
+	log.Printf("Connection to database successful. %v\n", db)
+
+	models.CreateProductTable(db)
+	newProd := &models.Product{
+		Name:      "Teste",
+		ID:        5757824,
+		Price:     352.5,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	newProd.Save(db)
 
 	return db
 }

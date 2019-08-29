@@ -9,9 +9,29 @@ services:
       - ./:/proj/src/go/apiRest
     depends_on:
       - postgres
+    networks:
+      - postgres-network
 
   postgres:
     image: "postgres:11.5-alpine"
     ports:
-      - 5432:5432
+      - 5431:5432
+    networks:
+      - postgres-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "renatogroff@yahoo.com.br"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2019!"
+    ports:
+      - "10000:80"
+    depends_on:
+      - postgres
+    networks:
+      - postgres-network
+
+networks: 
+  postgres-network:
+    driver: bridge
 
